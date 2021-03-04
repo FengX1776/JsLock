@@ -1,4 +1,4 @@
-﻿#include <Windows.h>
+#include <Windows.h>
 #include "Detours.hpp"
 #include <string>
 #include <vector>
@@ -54,55 +54,9 @@ DWORD getfun(const char* modulename,const char* funname) //一个简单的取模
     HMODULE mo = GetModuleHandleA(modulename); //先取模块句柄
     if (!mo) //没有加载这个模块?
     {
-        LoadLibraryA(modulename); //那就我来加载
+        mo = LoadLibraryA(modulename); //那就我来加载
     }
     return (DWORD)GetProcAddress(mo,funname); //返回的时候强制转换一下，没有人喜欢用windows.h那个FARPROC
-}
-
-std::uint8_t* PatternScan(void* module, const char* signature)//CSGOSimple上复制粘贴的特征码搜索,速度还够快
-{
-    static auto pattern_to_byte = [](const char* pattern) {
-        auto bytes = std::vector<int>{};
-        auto start = const_cast<char*>(pattern);
-        auto end = const_cast<char*>(pattern) + strlen(pattern);
-
-        for (auto current = start; current < end; ++current) {
-            if (*current == '?') {
-                ++current;
-                if (*current == '?')
-                    ++current;
-                bytes.push_back(-1);
-            }
-            else {
-                bytes.push_back(strtoul(current, &current, 16));
-            }
-        }
-        return bytes;
-    };
-
-    auto dosHeader = (PIMAGE_DOS_HEADER)module;
-    auto ntHeaders = (PIMAGE_NT_HEADERS)((std::uint8_t*)module + dosHeader->e_lfanew);
-
-    auto sizeOfImage = ntHeaders->OptionalHeader.SizeOfImage;
-    auto patternBytes = pattern_to_byte(signature);
-    auto scanBytes = reinterpret_cast<std::uint8_t*>(module);
-
-    auto size = patternBytes.size();
-    auto data = patternBytes.data();
-
-    for (auto i = 0ul; i < sizeOfImage - size; ++i) {
-        bool found = true;
-        for (auto counter = 0ul; counter < size; ++counter) {
-            if (scanBytes[i + counter] != data[counter] && data[counter] != -1) {
-                found = false;
-                break;
-            }
-        }
-        if (found) {
-            return &scanBytes[i];
-        }
-    }
-    return nullptr;
 }
 
 const char* js_filename; //js的文件名带目录

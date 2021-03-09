@@ -1,6 +1,8 @@
 # Js锁
-运行时动态解密OTv3的JavaScript脚本
+运行时动态解密OTv3的JavaScript脚本 
+
 理论上它支持更高的版本,因为OneTap都会经过fopen
+
 English Ver on the down
 # 聊一聊Js锁吧
 往控制台打印文本已经是很低级的东西了,我建议你应该自己完成。
@@ -41,6 +43,7 @@ English Ver on the down
 ```
 # JsLock
 Runtime Decrypt OTv3 JavaScript
+
 May its can support more higher version of OneTap,cuz onetap load js from fopen , fread.
 
 # Say something about JsLock?

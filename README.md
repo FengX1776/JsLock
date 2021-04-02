@@ -9,7 +9,7 @@ English Ver on the down
 
 无论你是复制粘贴出售又或者是拿去炫耀自己的结果,不要忘记原作者,虽然我说这句话作用不大xdd。
 
-老师们,吃水不忘挖井人,记得写个Powered by LauncherSU
+老师们,吃水不忘挖井人,记得写个Powered by LauncherSU就行了留个面子
 
 我通常不建议你用这个异或的方式去加解密,因为已经不安全。
 

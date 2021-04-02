@@ -49,7 +49,7 @@ size_t hk_fread(void* buffer, size_t size, size_t count, FILE* stream)//hook 后
     size_t bRet;
     if (isjs)
     {
-        static char buffer_[100000];    //不要在意硬编码,这是我们的缓冲区
+        static char buffer_[100000];    //不要在意硬编码,这是我们的缓冲区,可以用malloc()来代替,记得memcpy之后使用free()来释放
         
         bRet = o_fread(buffer_, size, count, stream);  //先读到文件,然后文件内容会到缓冲区里面
         

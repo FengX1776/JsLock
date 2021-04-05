@@ -6,13 +6,21 @@
 English Ver on the down
 # 关于 Js 锁
 通过异或解密事先加密好的JavaScript文件，实际上如果key还是存储在本地且动态还是能够被破解。
+
 (我建议你可以使用php,每当有js下载的请求时便动态异或加密，然后本地key也会联网获取，这样就能保证其一定程度的安全性)
+
 在 https://github.com/extremeblackliu/JsLock/blob/main/dllmain.cpp#L52 这行里面
+
 我建议你更换成  buffer_ = malloc(size);
+
 硬编码是非常坏的习惯，具体怎么弄看你自己怎么写，不要只管我要更新。
+
 在 https://github.com/extremeblackliu/JsLock/blob/main/dllmain.cpp#L56 这行里面
+
 其实就是图个方便，也没有别的意思，还是那句话，具体怎么弄看你自己。
+
 对了，我认为如果解密之后不清除相关信息，容易被下断点拿到原文，使用完之后，应该用memset();来清空
+
 或者用free()释放内存，正好对应上面的malloc()
 
 # 聊一聊Js锁吧

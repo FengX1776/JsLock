@@ -4,14 +4,21 @@
 理论上它支持更高的版本,因为OneTap都会经过fopen
 
 English Ver on the down
+# 关于 Js 锁
+通过异或解密事先加密好的JavaScript文件，实际上如果key还是存储在本地且动态还是能够被破解。
+(我建议你可以使用php,每当有js下载的请求时便动态异或加密，然后本地key也会联网获取，这样就能保证其一定程度的安全性)
+在 https://github.com/extremeblackliu/JsLock/blob/main/dllmain.cpp#L52 这行里面
+我建议你更换成  buffer_ = malloc(size);
+硬编码是非常坏的习惯，具体怎么弄看你自己怎么写，不要只管我要更新。
+在 https://github.com/extremeblackliu/JsLock/blob/main/dllmain.cpp#L56 这行里面
+其实就是图个方便，也没有别的意思，还是那句话，具体怎么弄看你自己。
+对了，我认为如果解密之后不清除相关信息，容易被下断点拿到原文，使用完之后，应该用memset();来清空
+或者用free()释放内存，正好对应上面的malloc()
+
 # 聊一聊Js锁吧
 往控制台打印文本已经是很低级的东西了,我建议你应该自己完成。
 
-无论你是复制粘贴出售又或者是拿去炫耀自己的结果,不要忘记原作者,虽然我说这句话作用不大xdd。
-
-老师们,吃水不忘挖井人,记得写个Powered by LauncherSU就行了留个面子
-
-我通常不建议你用这个异或的方式去加解密,因为已经不安全。
+更新了dllmain,纠正一下我说的话，我是说密钥已经泄露所以直接使用密钥这个加解密已经不安全
 
 另外,不要笑那个硬编码,这只是第一个版本。
 
